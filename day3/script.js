@@ -37,10 +37,10 @@ function getSummary() {
   
   let details = [];
   for (let cat in counts) {
-    details.push(${counts[cat]} );
+    details.push(`${counts[cat]} ${cat}`);
   }
   
-  return ${total} : .;
+  return `${total} ${noun}: ${details.join(", ")}.`;
 }
 
 function isDuplicate(text) {
@@ -72,34 +72,34 @@ function addNote(text, category) {
 // --- TESTS ---
 
 // 1. searchNotes
-console.log("searchNotes('day'):", searchNotes("day")); // Expected: [{ id: 2, text: "Finish the Day 3 assignment", category: "study" }]
-console.log("searchNotes('xyz'):", searchNotes("xyz")); // Expected: [] (Empty array)
+console.log("searchNotes('day'):", searchNotes("day")); 
+console.log("searchNotes('xyz'):", searchNotes("xyz")); 
 
 // 2. longestNote
-console.log("longestNote():", longestNote()); // Expected: { id: 3, text: "Email the project report to Grace", category: "work" }
-let tempNotes1 = [...notes]; notes = []; // temporarily empty array
-console.log("longestNote() empty array:", longestNote()); // Expected: null
-notes = [...tempNotes1]; // restore array
+console.log("longestNote():", longestNote()); 
+let tempNotes1 = [...notes]; notes = []; 
+console.log("longestNote() empty array:", longestNote()); 
+notes = [...tempNotes1]; 
 
 // 3. countByCategory
-console.log("countByCategory():", countByCategory()); // Expected: { personal: 2, study: 2, work: 1 }
+console.log("countByCategory():", countByCategory()); 
 let tempNotes2 = [...notes]; notes = [];
-console.log("countByCategory() empty array:", countByCategory()); // Expected: {}
+console.log("countByCategory() empty array:", countByCategory()); 
 notes = [...tempNotes2];
 
 // 4. getSummary
-console.log("getSummary():", getSummary()); // Expected: "5 notes: 2 personal, 2 study, 1 work."
+console.log("getSummary():", getSummary()); 
 let tempNotes3 = [...notes]; notes = [{ id: 1, text: "Single item", category: "personal" }];
-console.log("getSummary() single item:", getSummary()); // Expected: "1 note: 1 personal."
+console.log("getSummary() single item:", getSummary()); 
 notes = [...tempNotes3];
 
 // 5. isDuplicate
-console.log("isDuplicate('Call mum'):", isDuplicate("Call mum")); // Expected: true
-console.log("isDuplicate('  cALl mUm  '):", isDuplicate("  cALl mUm  ")); // Expected: true (ignores case and padding spaces)
-console.log("isDuplicate('Buy apples'):", isDuplicate("Buy apples")); // Expected: false
+console.log("isDuplicate('Call mum'):", isDuplicate("Call mum")); 
+console.log("isDuplicate('  cALl mUm  '):", isDuplicate("  cALl mUm  "));  
+console.log("isDuplicate('Buy apples'):", isDuplicate("Buy apples")); 
 
 // 6. addNote
-console.log("addNote normal:", addNote("Buy apples", "personal")); // Expected: true
-console.log("addNote duplicate:", addNote("Call mum", "personal")); // Expected: false (logs 'Duplicate note.')
-console.log("addNote invalid length:", addNote("", "work")); // Expected: false (logs 'Note must be 1-200 characters.')
-console.log("addNote invalid category:", addNote("Test", "hobby")); // Expected: false (logs 'Category must be personal, work, or study.')
+console.log("addNote normal:", addNote("Buy apples", "personal")); 
+console.log("addNote duplicate:", addNote("Call mum", "personal"));  
+console.log("addNote invalid length:", addNote("", "work"));  
+console.log("addNote invalid category:", addNote("Test", "hobby"));
